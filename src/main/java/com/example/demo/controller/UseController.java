@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.JobDetailModel;
 import com.example.demo.model.JobModel;
 import com.example.demo.model.UserModel;
 import com.example.demo.repository.UserRepository;
@@ -42,6 +43,14 @@ public class UseController {
     public ResponseEntity getAllJob(){
         LinkedHashMap<String, Object> res = new LinkedHashMap<>();
         List<JobModel> data = jobRepository.getJobList();
+        res.put("data", data);
+        return ResponseEntity.ok().body(res);
+    }
+
+    @GetMapping(path = "/recruitment/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllJobDetail(@PathVariable String name){
+        LinkedHashMap<String, Object> res = new LinkedHashMap<>();
+        List<JobDetailModel> data = jobRepository.getJobDetailList(name);
         res.put("data", data);
         return ResponseEntity.ok().body(res);
     }
