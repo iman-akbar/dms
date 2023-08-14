@@ -56,7 +56,7 @@ public class UseController {
         return ResponseEntity.ok().body(res);
     }
 
-    @GetMapping(path = "/yes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/JobList", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAllJson() {
         String uri = "http://dev3.dansmultipro.co.id/api/recruitment/positions.json";
         RestTemplate restTemplate = new RestTemplate();
@@ -67,16 +67,18 @@ public class UseController {
 
         return json.toString();
     }
-    @GetMapping(path = "/yes2", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getJsonDetail() {
-//        System.out.println(id);
-        String uri = "http://dev3.dansmultipro.co.id/api/recruitment/positions/";
+    @GetMapping(path = "/JobDetail", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getJsonDetail(String id) {
+        System.out.println(id);
+        String uri = "http://dev3.dansmultipro.co.id/api/recruitment/positions/32bf67e5-4971-47ce-985c-44b6b3860cdb";
+        String nyoba  =  "http://dev3.dansmultipro.co.id/api/recruitment/positions/" + id;
+        System.out.println(nyoba);
         RestTemplate restTemplate = new RestTemplate();
 
-        JSONArray json = new JSONArray(Objects.requireNonNull(restTemplate.getForObject(uri, Object[].class)));
-        System.out.println(json);
-        System.out.println(json.getJSONObject(0).get("id"));
+        String data = restTemplate.getForObject(uri, String.class);
+        System.out.println(data);
 
-        return json.toString();
+        return data;
     }
+
 }
