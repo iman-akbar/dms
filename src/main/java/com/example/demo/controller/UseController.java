@@ -67,4 +67,16 @@ public class UseController {
 
         return json.toString();
     }
+    @GetMapping(path = "/yes2", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getJsonDetail() {
+//        System.out.println(id);
+        String uri = "http://dev3.dansmultipro.co.id/api/recruitment/positions/";
+        RestTemplate restTemplate = new RestTemplate();
+
+        JSONArray json = new JSONArray(Objects.requireNonNull(restTemplate.getForObject(uri, Object[].class)));
+        System.out.println(json);
+        System.out.println(json.getJSONObject(0).get("id"));
+
+        return json.toString();
+    }
 }
